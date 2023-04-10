@@ -34,8 +34,11 @@ namespace Game
 
         public static void StartChapter(int index, IContext ctx)
         {
-            if (chapters is null)
+            if (chapters is null || index >= chapters.Length)
+            {
+                Debug.LogWarning($"Chapter with {index} index is not existed");
                 return;
+            }
             StartChapter(chapters[index], ctx);
         }
 
