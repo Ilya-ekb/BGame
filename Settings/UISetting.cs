@@ -1,6 +1,4 @@
-﻿using Game.Settings;
-
-namespace Game.UI
+﻿namespace Game.UI
 {
     public abstract class UISetting : ViewSetting
     {

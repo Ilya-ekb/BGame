@@ -1,5 +1,4 @@
 using Core;
-using Game.Settings;
 using UnityEngine;
 
 namespace Game
