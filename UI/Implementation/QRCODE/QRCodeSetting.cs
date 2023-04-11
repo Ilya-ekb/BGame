@@ -6,7 +6,7 @@ namespace Game.UI
     public class QRCodeSetting : UISetting
     {
         public Vector2Int size;
-        public Color colorDark = Color.black;
-        public Color colorLight = Color.white;
+        public Color foregroundColor = Color.black;
+        public Color codeColor = Color.white;
     }
 }

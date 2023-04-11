@@ -13,7 +13,7 @@ namespace Game.UI
         {
             base.OnAlive();
             var ipAddress = "http://" + uiContext.GetContext<MainContext>().GetContext<WebContext>().Address;
-            view.SetTexture(QRGenerator.Create(ipAddress, setting.size.x, setting.size.y, setting.colorDark, setting.colorLight));
+            view.SetTexture(QRGenerator.Create(ipAddress, setting.size.x, setting.size.y, setting.foregroundColor, setting.codeColor));
         }
     }
 }
