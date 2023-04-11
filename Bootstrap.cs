@@ -1,4 +1,4 @@
-using GameLogic;
+using Game;
 using UnityEngine;
 
 namespace Game

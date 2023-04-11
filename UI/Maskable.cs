@@ -1,9 +1,8 @@
 using System;
-using UI.View;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MonoComponents
+namespace Game.UI
 {
     [Serializable]
     public class Maskable : IGraphicMaskable

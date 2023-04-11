@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using BGCore.Game.Factories;
 using Core;
 using Core.ObjectsSystem;
-using UI.View;
-using Game.Settings.UISettings;
-using GameLogic.GameData.Contexts;
+using Game.Contexts;
+using Game.Factories;
 using UnityEngine;
 
 namespace Game.UI

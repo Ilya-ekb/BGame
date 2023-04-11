@@ -1,11 +1,10 @@
 ﻿using System;
-using Contexts;
 using Core.Locations.Model;
 using Core.ObjectsSystem;
-using Game.Settings;
-using GameLogic.Locations;
+using Game.Contexts;
+using Game.Locations;
 
-namespace BGCore.Game.Factories
+namespace Game.Factories
 {
     public class LocationFactory : IFactory
     {

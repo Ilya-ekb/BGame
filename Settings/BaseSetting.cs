@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Settings
+namespace Game
 {
     public class BaseSetting : ScriptableObject
     {

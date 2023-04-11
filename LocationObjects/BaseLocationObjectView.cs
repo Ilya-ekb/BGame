@@ -1,13 +1,12 @@
 using System;
-using Contexts;
+using Game.Contexts;
 using Core.Locations.Model;
 using Core.ObjectsSystem;
 using Game.LocationObjects;
-using Game.Settings;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace GameLogic.Views
+namespace Game.Views
 {
     public abstract class BaseLocationObjectView<TSetting, TObject> : BaseDroppable, ILocationObject
         where TSetting : ViewSetting

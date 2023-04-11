@@ -1,9 +1,8 @@
 ﻿using System;
-using Contexts;
 using Core;
 using Core.ObjectsSystem;
+using Game.Contexts;
 using Game.Settings;
-using GameLogic.GameData.Contexts;
 using UnityEngine;
 
 namespace Game.LocationObjects

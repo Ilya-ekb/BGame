@@ -1,7 +1,8 @@
 using Core;
+using Game.Settings;
 using UnityEngine;
 
-namespace Game.Settings
+namespace Game
 {
     public abstract class ViewSetting : BaseSetting
     {

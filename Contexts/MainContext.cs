@@ -1,7 +1,6 @@
-using Contexts;
 using Core.Chapters;
 
-namespace GameLogic.GameData.Contexts
+namespace Game.Contexts
 {
     public class MainContext : BaseContext
     { 

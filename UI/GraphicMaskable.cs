@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UI.View;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace MonoComponents
+namespace Game.UI
 {
     [Serializable]
     public class GraphicMaskable : IGraphicMaskable

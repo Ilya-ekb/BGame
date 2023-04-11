@@ -1,5 +1,4 @@
 ﻿using Core.ObjectsSystem;
-using UI.View;
 using UnityEngine;
 
 namespace Game.UI

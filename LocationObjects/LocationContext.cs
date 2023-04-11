@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Contexts;
+using Game.LocationObjects;
 
-namespace Game.LocationObjects
+namespace Game.Contexts
 {
     public class LocationContext : BaseContext
     {

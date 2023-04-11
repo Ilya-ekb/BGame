@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UI.View
+namespace Game.UI
 {
     public interface IUIGraphicComponent
     {

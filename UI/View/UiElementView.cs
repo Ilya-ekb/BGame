@@ -1,10 +1,8 @@
 ﻿using Core.Locations.Model;
 using Core.ObjectsSystem;
-using Game;
-using Game.Settings.UISettings;
 using UnityEngine;
 
-namespace UI.View
+namespace Game.UI
 {
     public abstract class UiElementView<TSetting, TComponent> : BaseDroppable
         where TComponent : Component, IUIGraphicComponent

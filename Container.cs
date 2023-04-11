@@ -1,9 +1,8 @@
-using Contexts;
 using Core;
 using Core.Chapters;
 using Core.Locations.Model;
-using GameLogic.GameData.Contexts;
-using GameLogic.Networks;
+using Game.Contexts;
+using Game.Networks;
 using UnityEngine;
 
 namespace Game

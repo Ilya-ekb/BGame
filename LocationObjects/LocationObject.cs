@@ -1,8 +1,8 @@
-﻿using BGCore.Game.Settings;
-using Contexts;
+﻿using Game.Settings;
+using Game.Contexts;
 using Game.LocationObjects;
 
-namespace BGCore.Game.LocationObjects
+namespace Game.LocationObjects
 {
     public class LocationObject : BaseLocationObject<LocationObjectView, LocationObjectSetting>
     {

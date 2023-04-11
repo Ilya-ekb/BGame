@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Contexts;
+using Game.Contexts;
 using Game.Characters.Control;
-using Game.LocationObjects;
 using Game.Settings;
-using GameLogic.Views;
+using Game.Views;
 using UnityEngine;
 
 namespace Game.Characters.View

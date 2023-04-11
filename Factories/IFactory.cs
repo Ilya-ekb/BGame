@@ -1,8 +1,8 @@
 ﻿using System;
-using Contexts;
 using Core.ObjectsSystem;
+using Game.Contexts;
 
-namespace BGCore.Game.Factories
+namespace Game.Factories
 {
     public interface IFactory 
     {

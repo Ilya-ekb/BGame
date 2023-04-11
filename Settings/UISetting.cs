@@ -1,4 +1,6 @@
-﻿namespace Game.Settings.UISettings
+﻿using Game.Settings;
+
+namespace Game.UI
 {
     public abstract class UISetting : ViewSetting
     {

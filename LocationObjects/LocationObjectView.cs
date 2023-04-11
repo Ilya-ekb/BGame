@@ -1,10 +1,10 @@
-﻿using BGCore.Game.Settings;
-using Contexts;
+﻿using Game.Settings;
+using Game.Contexts;
 using Game.LocationObjects;
-using GameLogic.Views;
+using Game.Views;
 using UnityEngine;
 
-namespace BGCore.Game.LocationObjects
+namespace Game.LocationObjects
 {
     public class LocationObjectView : BaseLocationObjectView<LocationObjectSetting, Transform>, ILocationObject
     {

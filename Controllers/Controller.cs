@@ -1,6 +1,7 @@
 using System;
 using Core.Entities.Loopables;
 using Core.LoopSystem;
+using Game;
 using Game.Settings;
 
 namespace Controllers

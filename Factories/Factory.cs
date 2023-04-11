@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Contexts;
 using Core.ObjectsSystem;
-using Game.Settings;
+using Game.Contexts;
 
-namespace BGCore.Game.Factories
+namespace Game.Factories
 {
     public static class Factory
     {

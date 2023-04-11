@@ -1,11 +1,10 @@
 using System.Linq;
-using BGCore.Game.Factories;
-using Contexts;
 using Core.Locations.Model;
-using GameLogic.GameData.Contexts;
+using Game.Contexts;
+using Game.Factories;
 using UnityEngine.SceneManagement;
 
-namespace GameLogic.Locations
+namespace Game.Locations
 {
     public class SceneLocation : Location
     {
