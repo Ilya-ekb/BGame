@@ -23,7 +23,6 @@ namespace Game.UI
                 ButtonSetting setting => new Button(setting, uiContext),
                 CanvasSetting setting => new Canvas(setting, uiContext),
                 GameVarSetting setting => new GameVarUI(setting, uiContext),
-                QRCodeSetting setting => new QRCode(setting, uiContext),
                 UIRootSetting setting => new UIRoot(setting, uiContext),
                 _ => null,
             };
