@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.UI
 {
-    [CreateAssetMenu(menuName = "Game/UI Settings/" + nameof(BackgroundSetting), fileName = nameof(BackgroundSetting))]
+    [CreateAssetMenu(menuName = "Game/UI Settings/" + nameof(BackgroundSetting))]
     public class BackgroundSetting : UISetting
     {
         public Sprite backgroundSprite;

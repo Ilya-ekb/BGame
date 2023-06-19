@@ -7,8 +7,7 @@ namespace Game
     public abstract class Bootstrap
     {
         
-        [RuntimeInitializeOnLoadMethod]
-        private static void Initialize()
+        public static void Initialize()
         {
             MonoLoop.Initiate();
         }
