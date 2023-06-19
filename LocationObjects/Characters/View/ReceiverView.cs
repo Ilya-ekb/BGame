@@ -2,22 +2,21 @@ using System;
 using System.Collections.Generic;
 using Game.Contexts;
 using Game.Characters.Control;
-using Game.Settings;
 using Game.Views;
 using UnityEngine;
 
 namespace Game.Characters.View
 {
     public abstract class ReceiverView<TSetting, TObject> : BaseLocationObjectView<TSetting, TObject>, IReceiver
-        where TSetting : BaseLocationObjectSetting
+        where TSetting : ViewSetting
         where TObject : Component
     {
         protected readonly IDictionary<Type, IReceiver> receivers = new Dictionary<Type, IReceiver>();
-        
+
         protected ReceiverView(TSetting setting, IContext context) : base(setting, context)
         {
         }
-        
+
         protected override void OnAlive()
         {
             base.OnAlive();
@@ -35,14 +34,14 @@ namespace Game.Characters.View
         public virtual void Pull(ICommand command)
         {
             var type = command.GetType();
-            if(receivers.TryGetValue(type, out var receiver))
+            if (receivers.TryGetValue(type, out var receiver))
                 receiver.Pull(command);
         }
 
         public virtual void Action(ICommand command)
         {
             var type = command.GetType();
-            if(receivers.TryGetValue(type, out var receiver))
+            if (receivers.TryGetValue(type, out var receiver))
                 receiver.Action(command);
         }
 

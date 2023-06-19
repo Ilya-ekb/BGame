@@ -22,7 +22,7 @@ namespace Core.Locations.Model
         {
             this.context = context;
             this.setting = setting;
-            view = new LocationView(setting, context);
+            view = (LocationView) setting.GetViewInstance(context);
         }
 
         public IEnumerable<TDroppable> GetAllObjects<TDroppable>()

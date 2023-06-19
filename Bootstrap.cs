@@ -1,20 +1,21 @@
-using Game;
+using Game.Factories;
+using Game.UI;
 using UnityEngine;
 
 namespace Game
 {
-    public partial class Bootstrap
+    public abstract class Bootstrap
     {
-        private static ContainerData data;
         
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
-            Initiate();
             MonoLoop.Initiate();
-            Container.Initiate(data);
         }
 
-        static partial void Initiate();
+        public static void Initiate(ContainerData data)
+        {
+            Container.Initiate(data);
+        }
     }
 }

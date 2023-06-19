@@ -4,15 +4,15 @@ using Core.Entities.Loopables;
 using Game.Characters.Control;
 using Game.Characters.View;
 using Game.LocationObjects;
-using Game.Settings;
 using UnityEngine;
 
 namespace Game.Characters.Model
 {
-    public abstract class ControllableLocationObject<TView, TControl, TSetting, TObject> : BaseLocationObject<TView, TSetting>, ICharacter
+    public abstract class ControllableLocationObject<TView, TControl, TSetting, TObject> 
+        : BaseLocationObject<TView, TSetting>
         where TView : ReceiverView<TSetting, TObject>
         where TControl : ControlLoopable
-        where TSetting : BaseLocationObjectSetting
+        where TSetting : ControlSetting<TControl>
         where TObject : Component
     {
         public GameObject Root => view?.Root.gameObject;
@@ -22,7 +22,7 @@ namespace Game.Characters.Model
 
         protected ControllableLocationObject(TSetting setting, IContext context) : base(setting, context)
         {
-            control = Utilities.Instantiate<TControl>(setting, context);
+            control = setting.GetControlLoopable(context);
         }
 
         protected override void OnAlive()

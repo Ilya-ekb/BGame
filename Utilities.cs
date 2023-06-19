@@ -1,6 +1,8 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
+using Core.ObjectsSystem;
+using Game;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -9,8 +11,6 @@ namespace Core
 {
     public static class Utilities
     {
-        public static T Instantiate<T>(params object[] parameters) => (T) Activator.CreateInstance(typeof(T), parameters);
-        
         public static string ToShortString(this object value)
         {
             var str = (string) value;

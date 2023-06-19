@@ -60,9 +60,9 @@ namespace Game.Views
             Root = null;
         }
         
-        protected void CreateView(Transform parent)
+        protected void CreateView(Transform parentTransform)
         {
-            Root = Object.Instantiate(resource, parent);
+            Root = Object.Instantiate(resource, parentTransform);
             Root.name = $"[{GetType().Name}] {resource.name}";
         }
 

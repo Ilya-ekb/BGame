@@ -13,7 +13,7 @@ namespace Game.Locations
         public SceneLocation(LocationSetting setting, IContext ctx) : base(setting, ctx)
         {
             foreach (var objectsSetting in setting.childSettings)
-                droppables.Add(Factory.CreateItem(objectsSetting, ctx));
+                droppables.Add(objectsSetting.GetInstance(ctx));
             
             scene = SceneManager.GetSceneByName(setting.SceneName);
             if (scene is {isLoaded: true})

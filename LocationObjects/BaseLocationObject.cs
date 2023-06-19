@@ -1,15 +1,13 @@
 ﻿using System;
-using Core;
 using Core.ObjectsSystem;
 using Game.Contexts;
-using Game.Settings;
 using UnityEngine;
 
 namespace Game.LocationObjects
 {
     public abstract class BaseLocationObject<TView, TSetting> : BaseDroppable, ILocationObject
         where TView : BaseDroppable, ILocationObject
-        where TSetting : BaseLocationObjectSetting
+        where TSetting : ViewSetting
     {
         public Guid Id { get; protected set; }
         public Transform Transform => view.Transform;
@@ -20,7 +18,7 @@ namespace Game.LocationObjects
         {
             Id = Guid.NewGuid();
             this.context = context.GetContext<MainContext>();
-            view = Utilities.Instantiate<TView>(setting, context);
+            view = (TView) setting.GetViewInstance(context);
         }
 
         protected override void OnAlive()

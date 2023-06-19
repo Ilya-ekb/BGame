@@ -36,7 +36,7 @@ namespace Game.UI
             uiContext = context;
             uiContext?.SetSelf(this);
             this.setting = setting;
-            view = Utilities.Instantiate<TView>(setting, context);
+            view = (TView) setting.GetViewInstance(uiContext);
             AssignChild();
         }
         
@@ -145,7 +145,7 @@ namespace Game.UI
             {
                 var childContext = new UiContext().SendParent(this);
                 childContext.AddContext(uiContext.GetContext<MainContext>());
-                ChildUiElements.Add((IUiElement) Factory.CreateItem(uiSetting, childContext));
+                ChildUiElements.Add((IUiElement) uiSetting.GetInstance(childContext));
             }
         }
         

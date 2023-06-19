@@ -4,9 +4,8 @@ using Game.Contexts;
 
 namespace Game.Factories
 {
-    public interface IFactory 
+    public interface IFactory
     {
-        Type SettingType { get; }
-        IDroppable CreateItem<TConfig>(TConfig config, IContext context);
+        IDroppable CreateItem<TConfig>(TConfig config, IContext context) where TConfig : ISetting;
     }
 }

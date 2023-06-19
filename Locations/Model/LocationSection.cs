@@ -17,7 +17,7 @@ namespace Core.Locations.Model
             this.context = context;
             Locations = new Location[locationSettings.Length];
             for (var i = 0; i < locationSettings.Length; i++)
-                Locations[i] = (Location) Factory.CreateItem(locationSettings[i], context);
+                Locations[i] = (Location) locationSettings[i].GetInstance(context);
             GEvent.Attach(GlobalEvents.Start, OnStart);
         }
 
