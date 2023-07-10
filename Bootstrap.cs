@@ -6,14 +6,9 @@ namespace Game
 {
     public abstract class Bootstrap
     {
-        
-        public static void Initialize()
-        {
-            MonoLoop.Initiate();
-        }
-
         public static void Initiate(ContainerData data)
         {
+            MonoLoop.Initiate();
             Container.Initiate(data);
         }
     }

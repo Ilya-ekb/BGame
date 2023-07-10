@@ -9,6 +9,7 @@ namespace Core.Locations.Model
 {
     public class LocationSection : BaseDroppable
     {
+        public IContext Context => context;
         public Location[] Locations { get; }
         private readonly IContext context;
 
