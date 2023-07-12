@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.ObjectsSystem;
 using Game.Contexts;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace Game.UI
     {
         public Action<IContext> OnClick { get; set; }
 
-        public ButtonView(ButtonSetting setting, UiContext ctx) : base(setting, ctx)
+        public ButtonView(ButtonSetting setting, UiContext ctx, IDroppable parent) : base(setting, ctx, parent)
         {
         }
 

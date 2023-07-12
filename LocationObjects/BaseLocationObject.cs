@@ -14,11 +14,11 @@ namespace Game.LocationObjects
         protected readonly TView view;
         protected readonly IContext context;
 
-        protected BaseLocationObject(TSetting setting, IContext context)
+        protected BaseLocationObject(TSetting setting, IContext context, IDroppable parent) : base(parent)
         {
             Id = Guid.NewGuid();
             this.context = context.GetContext<MainContext>();
-            view = (TView) setting.GetViewInstance(context);
+            view = (TView) setting.GetViewInstance(context, parent);
         }
 
         protected override void OnAlive()

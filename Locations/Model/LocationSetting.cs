@@ -21,14 +21,14 @@ namespace Core.Locations.Model
             return childSettings.FirstOrDefault(s => s is T) as T;
         }
 
-        public override IDroppable GetInstance<TContext>(TContext context)
+        public override IDroppable GetInstance<TContext>(TContext context, IDroppable parent)
         {
-            return new SceneLocation(this, context);
+            return new SceneLocation(this, context, parent);
         }
 
-        public override BaseDroppable GetViewInstance<TContext>(TContext context)
+        public override BaseDroppable GetViewInstance<TContext>(TContext context, IDroppable parent)
         {
-            return new LocationView(this, context);
+            return new LocationView(this, context, parent);
         }
     }
 }

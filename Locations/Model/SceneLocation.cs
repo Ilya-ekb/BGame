@@ -1,5 +1,6 @@
 using System.Linq;
 using Core.Locations.Model;
+using Core.ObjectsSystem;
 using Game.Contexts;
 using Game.Factories;
 using UnityEngine.SceneManagement;
@@ -10,10 +11,10 @@ namespace Game.Locations
     {
         private Scene scene;
         
-        public SceneLocation(LocationSetting setting, IContext ctx) : base(setting, ctx)
+        public SceneLocation(LocationSetting setting, IContext ctx, IDroppable parent) : base(setting, ctx, parent)
         {
             foreach (var objectsSetting in setting.childSettings)
-                droppables.Add(objectsSetting.GetInstance(ctx));
+                droppables.Add(objectsSetting.GetInstance(ctx, this));
             
             scene = SceneManager.GetSceneByName(setting.SceneName);
             if (scene is {isLoaded: true})

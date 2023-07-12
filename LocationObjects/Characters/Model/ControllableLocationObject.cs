@@ -20,7 +20,7 @@ namespace Game.Characters.Model
         
         protected readonly TControl control;
 
-        protected ControllableLocationObject(TSetting setting, IContext context) : base(setting, context)
+        protected ControllableLocationObject(TSetting setting, IContext context) : base(setting, context, null)
         {
             control = setting.GetControlLoopable(context);
         }

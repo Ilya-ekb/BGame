@@ -1,8 +1,10 @@
+using Core.ObjectsSystem;
+
 namespace Game.UI
 {
     public class GameVarView : UiElementView<GameVarSetting, TextVarComponent>
     {
-        public GameVarView(GameVarSetting setting, UiContext ctx) : base(setting, ctx)
+        public GameVarView(GameVarSetting setting, UiContext ctx, IDroppable parent) : base(setting, ctx, parent)
         {
         }
 

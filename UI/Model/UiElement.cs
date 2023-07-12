@@ -31,12 +31,12 @@ namespace Game.UI
             view.AddChildComponent(uiElement.RootComponent);
         }
 
-        protected UiElement(TSetting setting, UiContext context)
+        protected UiElement(TSetting setting, UiContext context, IDroppable parent) : base(parent)
         {
             uiContext = context;
             uiContext?.SetSelf(this);
             this.setting = setting;
-            view = (TView) setting.GetViewInstance(uiContext);
+            view = (TView) setting.GetViewInstance(uiContext, parent);
             AssignChild();
         }
         
@@ -145,7 +145,7 @@ namespace Game.UI
             {
                 var childContext = new UiContext().SendParent(this);
                 childContext.AddContext(uiContext.GetContext<MainContext>());
-                ChildUiElements.Add((IUiElement) uiSetting.GetInstance(childContext));
+                ChildUiElements.Add((IUiElement) uiSetting.GetInstance(childContext, this));
             }
         }
         

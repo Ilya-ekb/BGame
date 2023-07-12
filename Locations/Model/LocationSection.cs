@@ -13,12 +13,12 @@ namespace Core.Locations.Model
         public Location[] Locations { get; }
         private readonly IContext context;
 
-        public LocationSection(IContext context, params LocationSetting[] locationSettings)
+        public LocationSection(IContext context, params LocationSetting[] locationSettings) : base(null)
         {
             this.context = context;
             Locations = new Location[locationSettings.Length];
             for (var i = 0; i < locationSettings.Length; i++)
-                Locations[i] = (Location) locationSettings[i].GetInstance(context);
+                Locations[i] = (Location) locationSettings[i].GetInstance(context, this);
             GEvent.Attach(GlobalEvents.Start, OnStart);
         }
 

@@ -9,14 +9,14 @@ namespace Game.UI
         public Sprite backgroundSprite;
         [Range(0f, 1f)] public float alpha;
 
-        protected override IDroppable GetInstance(UiContext uiContext)
+        protected override IDroppable GetInstance(UiContext uiContext, IDroppable parent)
         {
-            return new Background(this, uiContext);
+            return new Background(this, uiContext, parent);
         }
 
-        protected override BaseDroppable GetViewInstance(UiContext uiContext)
+        protected override BaseDroppable GetViewInstance(UiContext uiContext, IDroppable parent)
         {
-            return new BackgroundView(this, uiContext);
+            return new BackgroundView(this, uiContext, parent);
         }
     }
 }

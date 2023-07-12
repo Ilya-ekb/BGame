@@ -18,11 +18,11 @@ namespace Core.Locations.Model
         protected readonly IList<IDroppable> droppables = new List<IDroppable>();
         protected readonly LocationSetting setting;
 
-        protected Location(LocationSetting setting, IContext context)
+        protected Location(LocationSetting setting, IContext context, IDroppable parent) : base(parent)
         {
             this.context = context;
             this.setting = setting;
-            view = (LocationView) setting.GetViewInstance(context);
+            view = (LocationView) setting.GetViewInstance(context, parent);
         }
 
         public IEnumerable<TDroppable> GetAllObjects<TDroppable>()

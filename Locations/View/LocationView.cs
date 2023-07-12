@@ -12,7 +12,7 @@ namespace Core.Locations.View
         protected readonly IContext context;
         private readonly GameObject resources;
 
-        public LocationView(LocationSetting setting, IContext ctx)
+        public LocationView(LocationSetting setting, IContext ctx, IDroppable parent) : base(parent)
         {
             resources = Resources.Load<GameObject>(setting.rootObjectPath);
             context = ctx;

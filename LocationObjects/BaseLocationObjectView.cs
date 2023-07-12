@@ -31,7 +31,7 @@ namespace Game.Views
         protected readonly TSetting setting;
         protected readonly TObject resource;
         protected readonly IContext context;
-        protected BaseLocationObjectView(TSetting setting, IContext context)
+        protected BaseLocationObjectView(TSetting setting, IContext context, IDroppable parent) : base(parent)
         {
             this.context = context;
             resource = Resources.Load<TObject>(setting.rootObjectPath);

@@ -6,11 +6,11 @@ namespace Game
 {
     public abstract class BaseSetting : ScriptableObject, ISetting
     {
-        public abstract IDroppable GetInstance<TContext>(TContext context) where TContext : IContext;
+        public abstract IDroppable GetInstance<TContext>(TContext context, IDroppable parent) where TContext : IContext;
     }
 
     public interface ISetting
     {
-        IDroppable GetInstance<TContext>(TContext context) where TContext : IContext;
+        IDroppable GetInstance<TContext>(TContext context, IDroppable parent) where TContext : IContext;
     }
 }

@@ -13,7 +13,7 @@ namespace Game.UI
         protected readonly TSetting setting;
         private readonly TComponent rootResource;
         
-        protected UiElementView(TSetting setting, UiContext ctx)
+        protected UiElementView(TSetting setting, UiContext ctx, IDroppable parent) : base(parent)
         {
             this.setting = setting;
             rootResource = Resources.Load<TComponent>(setting.rootObjectPath);

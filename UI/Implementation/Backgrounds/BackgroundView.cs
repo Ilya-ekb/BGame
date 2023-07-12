@@ -1,8 +1,10 @@
+using Core.ObjectsSystem;
+
 namespace Game.UI
 {
     public class BackgroundView : UiElementView<BackgroundSetting, BackgroundComponent>
     {
-        public BackgroundView(BackgroundSetting setting, UiContext ctx) : base(setting, ctx)
+        public BackgroundView(BackgroundSetting setting, UiContext ctx, IDroppable parent) : base(setting, ctx, parent)
         {
         }
 

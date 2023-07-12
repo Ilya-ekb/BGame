@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core.ObjectsSystem;
 using Game.Contexts;
 using Game.Characters.Control;
 using Game.Views;
@@ -13,7 +14,7 @@ namespace Game.Characters.View
     {
         protected readonly IDictionary<Type, IReceiver> receivers = new Dictionary<Type, IReceiver>();
 
-        protected ReceiverView(TSetting setting, IContext context) : base(setting, context)
+        protected ReceiverView(TSetting setting, IContext context, IDroppable parent) : base(setting, context, parent)
         {
         }
 
