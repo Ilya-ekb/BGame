@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core;
 using Core.ObjectsSystem;
 using Game.Contexts;
-using Game.Factories;
 using UnityEngine;
 
 namespace Game.UI
@@ -27,7 +25,7 @@ namespace Game.UI
         public void AddChild(IUiElement uiElement)
         {
             ChildUiElements.Add(uiElement);
-            uiElement.SetAlive(parent);
+            uiElement.SetAlive();
             view.AddChildComponent(uiElement.RootComponent);
         }
 
@@ -82,7 +80,7 @@ namespace Game.UI
         protected override void OnAlive()
         {
             base.OnAlive();
-            view.SetAlive(parent);
+            view.SetAlive();
             SetContentHolder();
             ChildSetAlive();
             IsShown = setting.showOnAlive;
@@ -133,7 +131,7 @@ namespace Game.UI
 
             foreach (var childUiElement in ChildUiElements)
             {
-                childUiElement.SetAlive(parent);
+                childUiElement.SetAlive();
                 view.AddChildComponent(childUiElement.RootComponent);
             }
         }

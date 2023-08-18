@@ -24,7 +24,7 @@ namespace Game.LocationObjects
         protected override void OnAlive()
         {
             base.OnAlive();
-            view?.SetAlive(parent);
+            view?.SetAlive();
             context?.GetContext<LocationContext>()?.AddObject(this);
         }
 

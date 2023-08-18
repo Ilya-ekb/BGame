@@ -2,20 +2,15 @@ using System.Linq;
 using Core.Locations.View;
 using Core.ObjectsSystem;
 using Game;
-using Game.Locations;
-using UnityEngine;
+using Game.Contexts;
 
 namespace Core.Locations.Model
 {
-    [CreateAssetMenu(menuName = "Game/Settings/"+ nameof(LocationSetting), fileName = nameof(LocationSetting))]
-    public class LocationSetting : ViewSetting
+    public abstract class LocationSetting : ViewSetting
     {
-        public string SceneName => sceneName;
         
         public BaseSetting[] childSettings;
-
-        [SerializeField] private string sceneName;
-
+        
         public T GetConfig<T>() where T: BaseSetting
         {
             return childSettings.FirstOrDefault(s => s is T) as T;
@@ -23,12 +18,15 @@ namespace Core.Locations.Model
 
         public override IDroppable GetInstance<TContext>(TContext context, IDroppable parent)
         {
-            return new SceneLocation(this, context, parent);
+            return GetInstanceInner( context, parent);
         }
 
         public override BaseDroppable GetViewInstance<TContext>(TContext context, IDroppable parent)
         {
-            return new LocationView(this, context, parent);
+            return GetViewInstanceInner(context, parent);
         }
+
+        protected abstract Location GetInstanceInner( IContext context, IDroppable parent);
+        protected abstract LocationView GetViewInstanceInner(IContext context, IDroppable parent);
     }
 }

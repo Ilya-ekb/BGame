@@ -34,5 +34,10 @@ namespace Game
         {
             CoreLoopService.Execute(Loops.GizmosSelected);
         }
+
+        public static void Dispose()
+        {
+            Loops.Dispose();
+        }
     }
 }

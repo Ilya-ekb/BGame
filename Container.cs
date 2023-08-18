@@ -9,10 +9,12 @@ namespace Game
 {
     public static partial class Container
     {
-        public static LocationSection ActiveSection { get; private set; }
+        public static LocationSection StaticSection { get; private set; }
+        public static LocationSection DynamicSection { get; private set; }
         public static ThreadDispatcher ThreadDispatcher { get; private set; }
 
         private static Chapter[] chapters;
+        private static IContext context;
 
         public static void Initiate(ContainerData data)
         {
@@ -22,26 +24,30 @@ namespace Game
                 return;
             }
             chapters = data.chapters;
+            context = new MainContext();
+            context.AddContext(context);
+            StaticSection = new LocationSection(context, data.bootLocationSettings);
+            StaticSection.SetAlive();
             ThreadDispatcher = new ThreadDispatcher();
-            GEvent.Attach(GlobalEvents.DropSection, OnDrop);
+            GEvent.Attach(GlobalEvents.DropDynamicSection, OnDrop);
         }
-
-        private static void OnDrop(object[] obj)
-        {
-            ActiveSection?.Drop();
-        }
-
-        public static void StartChapter(int index, IContext ctx)
+        
+        public static void StartChapter(int index)
         {
             if (chapters is null || index >= chapters.Length)
             {
                 Debug.LogWarning($"Chapter with {index} index is not existed");
                 return;
             }
-            StartChapter(chapters[index], ctx);
+            StartChapter(chapters[index]);
         }
 
-        private static void StartChapter(Chapter chapter, IContext context)
+        public static void Dispose()
+        {
+            StaticSection?.Drop();
+        }
+
+        private static void StartChapter(Chapter chapter)
         {
             if (chapter is null)
             {
@@ -50,9 +56,14 @@ namespace Game
             
             context.GetContext<MainContext>().SetChapter(chapter);
 
-            GEvent.Call(GlobalEvents.DropSection);
-            ActiveSection = new LocationSection(context, chapter.locationSettings);
-            GEvent.Call(GlobalEvents.Start);
+            GEvent.Call(GlobalEvents.DropDynamicSection);
+            DynamicSection = new LocationSection(context, chapter.locationSettings);
+            GEvent.Call(GlobalEvents.StartDynamicSection);
+        }
+        
+        private static void OnDrop(object[] obj)
+        {
+            DynamicSection?.Drop();
         }
     }
 }

@@ -23,6 +23,9 @@ namespace Core.Locations.Model
             this.context = context;
             this.setting = setting;
             view = (LocationView) setting.GetViewInstance(context, parent);
+            
+            foreach (var objectsSetting in setting.childSettings)
+                droppables.Add(objectsSetting.GetInstance(context, this));
         }
 
         public IEnumerable<TDroppable> GetAllObjects<TDroppable>()
@@ -41,14 +44,14 @@ namespace Core.Locations.Model
         {
             if (view is null)
                 return;
-            view.SetAlive(parent);
+            view.SetAlive();
             SetAliveChildren();
         }
         
         protected virtual void SetAliveChildren()
         {
             foreach (var droppable in droppables)
-                droppable?.SetAlive(parent);
+                droppable?.SetAlive();
         }
 
         protected override void OnDrop()

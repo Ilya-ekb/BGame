@@ -22,7 +22,7 @@ namespace Game.Characters.View
         {
             base.OnAlive();
             foreach (var receiver in receivers.Values)
-                receiver.SetAlive(parent);
+                receiver.SetAlive();
         }
 
         protected override void OnDrop()

@@ -2,7 +2,7 @@ using System.Linq;
 using Core.Locations.Model;
 using Core.ObjectsSystem;
 using Game.Contexts;
-using Game.Factories;
+using Plugins.BGame.Locations.Model;
 using UnityEngine.SceneManagement;
 
 namespace Game.Locations
@@ -10,37 +10,35 @@ namespace Game.Locations
     public class SceneLocation : Location
     {
         private Scene scene;
-        
-        public SceneLocation(LocationSetting setting, IContext ctx, IDroppable parent) : base(setting, ctx, parent)
+
+        public SceneLocation(SceneLocationSetting setting, IContext ctx, IDroppable parent) : base(setting, ctx, parent)
         {
-            foreach (var objectsSetting in setting.childSettings)
-                droppables.Add(objectsSetting.GetInstance(ctx, this));
-            
             scene = SceneManager.GetSceneByName(setting.SceneName);
             if (scene is {isLoaded: true})
             {
-                SetAlive(this);
+                SetAlive();
                 return;
             }
-            
+
             var operation = SceneManager.LoadSceneAsync(setting.SceneName, LoadSceneMode.Additive);
             operation.completed += _ =>
             {
                 scene = SceneManager.GetSceneByName(setting.SceneName);
-                SetAlive(this);
+                SetAlive();
             };
         }
 
         protected override void OnAlive()
         {
             base.OnAlive();
-            SceneManager.MoveGameObjectToScene(Root, scene);
+            if (Root)
+                SceneManager.MoveGameObjectToScene(Root, scene);
         }
 
         protected override void OnDrop()
         {
             var chapter = context.GetContext<MainContext>().CurrentChapter;
-            var isNewScene = chapter.locationSettings.All(s => s is { } sls && sls.SceneName != scene.name);
+            var isNewScene = chapter.locationSettings.All(s => s is SceneLocationSetting sls && sls.SceneName != scene.name);
             if (isNewScene && scene.isLoaded)
                 SceneManager.UnloadSceneAsync(scene.name);
             base.OnDrop();
