@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.ObjectsSystem;
+using Game;
 using Game.Contexts;
 
 namespace Core.Locations.Model
