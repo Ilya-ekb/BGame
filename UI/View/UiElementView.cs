@@ -1,4 +1,4 @@
-﻿using Core.Locations.Model;
+﻿using Game.Locations.Model;
 using Core.ObjectsSystem;
 using UnityEngine;
 

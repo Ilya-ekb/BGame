@@ -1,8 +1,6 @@
 using System;
 using System.Net;
 using System.Net.Sockets;
-using Core.ObjectsSystem;
-using Game;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -104,7 +102,7 @@ namespace Core
         
         public static void Log(string msg, Color color)
         {
-            Debug.Log($"<b>Client:</b> <color=#{ColorUtility.ToHtmlStringRGBA(color)}>- {msg} </color>");
+            Debug.Log($"<color=#{ColorUtility.ToHtmlStringRGBA(color)}>- {msg} </color>");
         }
     }
 

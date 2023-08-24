@@ -1,10 +1,9 @@
-﻿using Core.Locations.View;
-using Core.ObjectsSystem;
+﻿using Core.ObjectsSystem;
+using Game.Locations.View;
 using Game.Contexts;
-using Plugins.BGame.Locations.Model;
 using UnityEngine;
 
-namespace Core.Locations.Model
+namespace Game.Locations.Model
 {
     [CreateAssetMenu(menuName = "Game/Settings/"+ nameof(BootLocationSetting))]
     public class BootLocationSetting : LocationSetting

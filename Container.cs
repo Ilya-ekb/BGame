@@ -1,17 +1,16 @@
+using System;
 using Core;
-using Core.Chapters;
-using Core.Locations.Model;
+using Core.ObjectsSystem;
+using Game.Chapters;
+using Game.Locations.Model;
 using Game.Contexts;
-using Game.Networks;
-using UnityEngine;
 
 namespace Game
 {
-    public static partial class Container
+    public static class Container
     {
         public static LocationSection StaticSection { get; private set; }
         public static LocationSection DynamicSection { get; private set; }
-        public static ThreadDispatcher ThreadDispatcher { get; private set; }
 
         private static Chapter[] chapters;
         private static IContext context;
@@ -20,26 +19,43 @@ namespace Game
         {
             if (data is null)
             {
-                Debug.LogWarning("Data file is null");
-                return;
+                throw new Exception("Data file is null");
             }
+
             chapters = data.chapters;
             context = new MainContext();
             context.AddContext(context);
-            StaticSection = new LocationSection(context, data.bootLocationSettings);
-            StaticSection.SetAlive();
-            ThreadDispatcher = new ThreadDispatcher();
-            GEvent.Attach(GlobalEvents.DropDynamicSection, OnDrop);
+
+            GEvent.Attach(Events.GlobalEvents.StartStatic, OnStartStatic);
+            GEvent.Attach(Events.GlobalEvents.StartDynamic, OnStartDynamic);
         }
-        
-        public static void StartChapter(int index)
+
+        public static void StartStaticSection(LocationSetting[] locationSettings)
+        {
+            if (locationSettings is null || locationSettings.Length == 0)
+                return;
+
+            StaticSection = new LocationSection(context, locationSettings);
+
+            GEvent.Attach(Events.GlobalEvents.DropStatic, OnDropStatic);
+            GEvent.Call(Events.GlobalEvents.StartStatic);
+        }
+
+        public static void StartDynamicSection(int index)
         {
             if (chapters is null || index >= chapters.Length)
             {
-                Debug.LogWarning($"Chapter with {index} index is not existed");
-                return;
+                throw new Exception($"Chapter with {index} index is not existed");
             }
+
             StartChapter(chapters[index]);
+        }
+
+        public static TDroppable GetObject<TDroppable>(Func<TDroppable, bool> predicate = null) where TDroppable : IDroppable
+        {
+            return StaticSection is { } ? StaticSection.GetObject(predicate) :
+                DynamicSection is { } ? DynamicSection.GetObject(predicate) : 
+                default;
         }
 
         public static void Dispose()
@@ -53,16 +69,37 @@ namespace Game
             {
                 return;
             }
-            
+
             context.GetContext<MainContext>().SetChapter(chapter);
 
-            GEvent.Call(GlobalEvents.DropDynamicSection);
+            GEvent.Call(Events.GlobalEvents.DropDynamic);
             DynamicSection = new LocationSection(context, chapter.locationSettings);
-            GEvent.Call(GlobalEvents.StartDynamicSection);
+
+            GEvent.Attach(Events.GlobalEvents.DropDynamic, OnDropDynamic);
+            GEvent.Call(Events.GlobalEvents.StartDynamic);
         }
-        
-        private static void OnDrop(object[] obj)
+
+        private static void OnStartStatic(object[] obj)
         {
+            GEvent.Detach(Events.GlobalEvents.StartStatic, OnStartStatic);
+            StaticSection?.DelayedSetAlive();
+        }
+
+        private static void OnStartDynamic(object[] obj)
+        {
+            GEvent.Detach(Events.GlobalEvents.StartDynamic, OnStartDynamic);
+            DynamicSection?.DelayedSetAlive();
+        }
+
+        private static void OnDropStatic(object[] obj)
+        {
+            GEvent.Detach(Events.GlobalEvents.DropStatic, OnDropStatic);
+            StaticSection?.Drop();
+        }
+
+        private static void OnDropDynamic(object[] obj)
+        {
+            GEvent.Detach(Events.GlobalEvents.DropDynamic, OnDropDynamic);
             DynamicSection?.Drop();
         }
     }

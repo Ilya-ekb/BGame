@@ -1,9 +1,9 @@
 using Game.Contexts;
-using Core.Locations.Model;
+using Game.Locations.Model;
 using Core.ObjectsSystem;
 using UnityEngine;
 
-namespace Core.Locations.View
+namespace Game.Locations.View
 {
     public class LocationView : BaseDroppable
     {

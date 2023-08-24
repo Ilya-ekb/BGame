@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Locations.View;
+using Game.Locations.View;
 using Core.ObjectsSystem;
 using Game.Contexts;
 using UnityEngine;
 
-namespace Core.Locations.Model
+namespace Game.Locations.Model
 {
     public abstract class Location : BaseDroppable
 

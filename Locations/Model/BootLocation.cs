@@ -1,14 +1,13 @@
-﻿using Core.Locations.Model;
-using Core.ObjectsSystem;
+﻿using Core.ObjectsSystem;
 using Game.Contexts;
 
-namespace Plugins.BGame.Locations.Model
+namespace Game.Locations.Model
 {
     public class BootLocation : Location
     {
         public BootLocation(BootLocationSetting setting, IContext context, IDroppable parent) : base(setting, context, parent)
         {
-            SetAlive();
+            SetAlive();   
         }
 
         protected override void OnAlive()

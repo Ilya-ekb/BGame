@@ -1,8 +1,8 @@
 using System;
 using Game.Contexts;
-using Core.Locations.Model;
 using Core.ObjectsSystem;
 using Game.LocationObjects;
+using Game.Locations.Model;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

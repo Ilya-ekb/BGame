@@ -1,11 +1,9 @@
 using System.Linq;
-using Core.Locations.Model;
 using Core.ObjectsSystem;
 using Game.Contexts;
-using Plugins.BGame.Locations.Model;
 using UnityEngine.SceneManagement;
 
-namespace Game.Locations
+namespace Game.Locations.Model
 {
     public class SceneLocation : Location
     {

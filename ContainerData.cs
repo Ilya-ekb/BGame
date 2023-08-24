@@ -1,8 +1,6 @@
 ﻿using System;
-using Core.Chapters;
-using Core.Locations.Model;
-using Plugins.BGame.Locations.Model;
-using UnityEngine.Serialization;
+using Game.Chapters;
+using Game.Locations.Model;
 
 namespace Game
 {

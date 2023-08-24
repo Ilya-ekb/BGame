@@ -1,4 +1,4 @@
-using Core.Chapters;
+using Game.Chapters;
 
 namespace Game.Contexts
 {

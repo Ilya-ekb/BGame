@@ -1,7 +1,7 @@
 using System;
-using Core.Locations.Model;
+using Game.Locations.Model;
 
-namespace Core.Chapters
+namespace Game.Chapters
 {
     [Serializable]
     public class Chapter
