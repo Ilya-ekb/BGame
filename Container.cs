@@ -27,7 +27,6 @@ namespace Game
             context.AddContext(context);
 
             GEvent.Attach(Events.GlobalEvents.StartStatic, OnStartStatic);
-            GEvent.Attach(Events.GlobalEvents.StartDynamic, OnStartDynamic);
         }
 
         public static void StartStaticSection(LocationSetting[] locationSettings)
@@ -72,7 +71,9 @@ namespace Game
 
             context.GetContext<MainContext>().SetChapter(chapter);
 
+            GEvent.Attach(Events.GlobalEvents.StartDynamic, OnStartDynamic);
             GEvent.Call(Events.GlobalEvents.DropDynamic);
+            
             DynamicSection = new LocationSection(context, chapter.locationSettings);
 
             GEvent.Attach(Events.GlobalEvents.DropDynamic, OnDropDynamic);
