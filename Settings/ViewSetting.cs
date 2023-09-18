@@ -8,9 +8,12 @@ namespace Game
 {
     public abstract class ViewSetting : BaseSetting
     {
+        public int siblingOffset;
+        public int siblingIndex;
         public Object rootObject;
         public string rootObjectPath;
-
+        public ViewSetting[] childrenSettings;
+        
         public abstract BaseDroppable GetViewInstance<TContext>(TContext context, IDroppable parent) where TContext : IContext;
         
         protected virtual void OnValidate()
@@ -19,6 +22,10 @@ namespace Game
             {
 #if UNITY_EDITOR
                 rootObjectPath = Utilities.GetValidPathToResource(rootObject);
+                for (var i = 0; i < childrenSettings.Length; i++)
+                {
+                    childrenSettings[i].siblingIndex = i + siblingOffset;
+                }
 #endif
             }
         }

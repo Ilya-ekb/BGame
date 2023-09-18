@@ -9,11 +9,7 @@ using UnityEngine;
 namespace Game.Locations.Model
 {
     public abstract class Location : BaseDroppable
-
     {
-        public GameObject Root => view.Root;
-
-        protected readonly LocationView view;
         protected readonly IContext context;
         protected readonly IList<IDroppable> droppables = new List<IDroppable>();
         protected readonly LocationSetting setting;
@@ -22,8 +18,7 @@ namespace Game.Locations.Model
         {
             this.context = context;
             this.setting = setting;
-            view = (LocationView) setting.GetViewInstance(context, parent);
-            
+
             foreach (var objectsSetting in setting.childSettings)
                 droppables.Add(objectsSetting.GetInstance(context, this));
         }
@@ -42,25 +37,23 @@ namespace Game.Locations.Model
 
         protected override void OnAlive()
         {
-            if (view is null)
-                return;
-            view.SetAlive();
+            base.OnAlive();
             SetAliveChildren();
         }
-        
+
+        protected override void OnDrop()
+        {
+            DropChildren();
+            base.OnDrop();
+        }
+
         protected virtual void SetAliveChildren()
         {
             foreach (var droppable in droppables)
                 droppable?.SetAlive();
         }
 
-        protected override void OnDrop()
-        {
-            view?.Drop();
-            DropChildren();
-        }
-
-        private void DropChildren()
+        protected void DropChildren()
         {
             foreach (var droppable in droppables)
                 droppable?.Drop();

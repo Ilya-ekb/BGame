@@ -1,21 +1,23 @@
+﻿using Core.ObjectsSystem;
 using Game.Contexts;
 using Game.Locations.Model;
-using Core.ObjectsSystem;
 using UnityEngine;
 
 namespace Game.Locations.View
 {
-    public class LocationView : BaseDroppable
+    public class SceneLocationView : BaseDroppable
     {
-        public GameObject Root { get; private set; }
-        
-        protected readonly IContext context;
-        private readonly GameObject resources;
+        public GameObject Root { get; protected set; }
 
-        public LocationView(LocationSetting setting, IContext ctx, IDroppable parent) : base(parent)
+        private readonly GameObject resources;
+        protected readonly IContext context;
+        protected readonly SceneLocationSetting setting;
+
+        public SceneLocationView(SceneLocationSetting setting, IContext ctx, IDroppable parent) : base(parent)
         {
             resources = Resources.Load<GameObject>(setting.rootObjectPath);
             context = ctx;
+            this.setting = setting;
         }
 
         protected override void OnAlive()
@@ -24,14 +26,14 @@ namespace Game.Locations.View
             if(!resources)
                 return;
             Root = Object.Instantiate(resources);
-            Root.name = $"[{GetType().Name}]"+ resources.name;
+            Root.name = $"[{GetType().Name}] "+ setting.name;
         }
-        
+
         protected override void OnDrop()
-        {
-            base.OnDrop();
+        { 
             Object.Destroy(Root);
             Root = null;
+            base.OnDrop();
         }
     }
 }

@@ -12,10 +12,5 @@ namespace Game.Locations.Model
         {
             return new BootLocation(this, context, parent);
         }
-
-        protected override LocationView GetViewInstanceInner(IContext context, IDroppable parent)
-        {
-            return null;
-        }
     }
 }

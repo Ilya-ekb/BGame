@@ -12,6 +12,7 @@ namespace Game.Views
         where TSetting : ViewSetting
         where TObject : Component
     {
+        public Guid Id { get; }
         public Transform Transform => Root.transform;
 
         protected virtual Vector3 Position
@@ -25,47 +26,61 @@ namespace Game.Views
             get => Transform.rotation;
             set => Transform.rotation = value;
         }
-        
+
         public TObject Root { get; set; }
-        
+
         protected readonly TSetting setting;
-        protected readonly TObject resource;
         protected readonly IContext context;
+
         protected BaseLocationObjectView(TSetting setting, IContext context, IDroppable parent) : base(parent)
         {
+            Id = Guid.NewGuid();
             this.context = context;
-            resource = Resources.Load<TObject>(setting.rootObjectPath);
-            if(!resource)
-                Debug.LogError($"<COLOR=YELLOW>{typeof(TObject).Name}</COLOR> is not loaded from {setting.rootObjectPath}");
             this.setting = setting;
         }
 
+        protected abstract void LoadResource(Action<TObject> onComplete);
+
         protected override void OnAlive()
         {
-            base.OnAlive();
-            var transform = parent switch
+            LoadResource(resource =>
             {
-                ILocationObject locationObject => locationObject.Transform,
-                Location location => location.Root.transform,
-                _ => null
-            };
-            CreateView(transform);
+                if (resource is null)
+                {
+                    Debug.LogError($"<COLOR=YELLOW>{typeof(TObject).Name}</COLOR> is not loaded from {setting.rootObjectPath}");
+                    return;
+                }
+
+                CreateView(resource);
+                base.OnAlive();
+            });
         }
 
         protected override void OnDrop()
         {
             base.OnDrop();
-            if(Root)
+            if (Root)
                 Object.DestroyImmediate(Root.gameObject);
             Root = null;
         }
-        
-        protected void CreateView(Transform parentTransform)
+
+        protected void CreateView(TObject resource)
         {
+            var parentTransform = parent switch
+            {
+                ILocationObject locationObject => locationObject.Transform,
+                SceneLocation location => location.Root.transform,
+                _ => null
+            };
+
             Root = Object.Instantiate(resource, parentTransform);
-            Root.name = $"[{GetType().Name}] {resource.name}";
+            Root.name = $"[{GetType().Name}] {setting.name}";
+            Root.transform.SetSiblingIndex(setting.siblingIndex);
+            OnCreateView();
         }
 
-        public Guid Id { get; }
+        protected virtual void OnCreateView()
+        {
+        }
     }
 }
