@@ -7,13 +7,6 @@ namespace Game.Locations.Model
     {
         public BootLocation(BootLocationSetting setting, IContext context, IDroppable parent) : base(setting, context, parent)
         {
-            SetAlive();   
-        }
-
-        protected override void OnAlive()
-        {
-            base.OnAlive();
-            SetAliveChildren();
         }
     }
 }

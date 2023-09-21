@@ -1,7 +1,5 @@
 using System;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Core.ObjectsSystem;
 using Game.Contexts;
 
@@ -10,7 +8,6 @@ namespace Game.Locations.Model
     public class LocationSection : BaseDroppable
     {
         private readonly IDroppable[] locations;
-        private CancellationTokenSource cancellationTokenSource;
         private CancellationToken token;
 
         public LocationSection(IContext context, params LocationSetting[] locationSettings) : base(null)
@@ -20,30 +17,20 @@ namespace Game.Locations.Model
                 locations[i] = locationSettings[i].GetInstance(context, this);
         }
 
-        public async void DelayedSetAlive()
+        protected override void OnAlive()
         {
-            cancellationTokenSource = new CancellationTokenSource();
-            token = cancellationTokenSource.Token;
-            await Task.Run(AwaitLoad, token);
+            base.OnAlive();
+            foreach (var location in locations)
+                location?.SetAlive();
         }
 
         protected override void OnDrop()
         {
-            cancellationTokenSource.Cancel();
             foreach (var loc in locations)
-                loc.Drop();
+                loc?.Drop();
             base.OnDrop();
         }
-
-        private void AwaitLoad() {
-            while (locations.Any(l => l is {IsAlive: false}))
-            {
-                if(token.IsCancellationRequested)
-                    return;
-            } 
-            SetAlive();
-        }
-
+        
         public TDroppable GetObject<TDroppable>(Func<TDroppable, bool> predicate = null) where TDroppable : IDroppable
         {
             foreach (var loc in locations)

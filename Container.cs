@@ -13,7 +13,7 @@ namespace Game
         public static LocationSection DynamicSection { get; private set; }
 
         private static Chapter[] chapters;
-        private static IContext context;
+        private static MainContext context;
 
         public static void Initiate(ContainerData data)
         {
@@ -83,13 +83,13 @@ namespace Game
         private static void OnStartStatic(object[] obj)
         {
             GEvent.Detach(Events.GlobalEvents.StartStatic, OnStartStatic);
-            StaticSection?.DelayedSetAlive();
+            StaticSection?.SetAlive();
         }
 
         private static void OnStartDynamic(object[] obj)
         {
             GEvent.Detach(Events.GlobalEvents.StartDynamic, OnStartDynamic);
-            DynamicSection?.DelayedSetAlive();
+            DynamicSection?.SetAlive();
         }
 
         private static void OnDropStatic(object[] obj)

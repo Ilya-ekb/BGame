@@ -1,4 +1,5 @@
 using System.Linq;
+using Core;
 using Core.ObjectsSystem;
 using Game.Contexts;
 using Game.Locations.View;
@@ -21,7 +22,6 @@ namespace Game.Locations.Model
             scene = SceneManager.GetSceneByName(setting.SceneName);
             if (scene is {isLoaded: true})
             {
-                SetAlive();
                 return;
             }
 
@@ -29,30 +29,35 @@ namespace Game.Locations.Model
             operation.completed += _ =>
             {
                 scene = SceneManager.GetSceneByName(setting.SceneName);
-                SetAlive();
             };
         }
 
         protected override void OnAlive()
         {
-            view.SetAlive();
+            Scheduler.InvokeWhen(()=> scene.isLoaded && !IsAlive, () =>
+            {
+                view.SetAlive();
 
-            if (Root)
-                SceneManager.MoveGameObjectToScene(Root, scene);
-            SetAliveChildren();
-            IsAlive = true;
+                if (Root)
+                    SceneManager.MoveGameObjectToScene(Root, scene);
+                SetAliveChildren();
+                IsAlive = true;
+            });
         }
 
         protected override void OnDrop()
         {
-            var chapter = context.GetContext<MainContext>().CurrentChapter;
-            var isNewScene = chapter.locationSettings.All(s => s is SceneLocationSetting sls && sls.SceneName != scene.name);
-            DropChildren();
-            view?.Drop();
+            Scheduler.InvokeWhen(()=> !IsAlive, () =>
+            {
+                var chapter = context.GetContext<MainContext>().CurrentChapter;
+                var isNewScene = chapter.locationSettings.All(s => s is SceneLocationSetting sls && sls.SceneName != scene.name);
+                DropChildren();
+                view?.Drop();
 
-            if (isNewScene && scene.isLoaded)
-                SceneManager.UnloadSceneAsync(scene.name);
-            base.OnDrop();
+                if (isNewScene && scene.isLoaded)
+                    SceneManager.UnloadSceneAsync(scene.name);
+                base.OnDrop();
+            });
         }
     }
 }
