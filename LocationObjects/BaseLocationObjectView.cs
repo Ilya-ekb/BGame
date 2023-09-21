@@ -27,7 +27,7 @@ namespace Game.Views
             set => Transform.rotation = value;
         }
 
-        public TObject Root { get; set; }
+        public TObject Root { get; private set; }
 
         protected readonly TSetting setting;
         protected readonly IContext context;
@@ -39,7 +39,11 @@ namespace Game.Views
             this.setting = setting;
         }
 
-        protected abstract void LoadResource(Action<TObject> onComplete);
+        protected virtual void LoadResource(Action<TObject> onComplete)
+        {
+            var resource = Resources.Load<TObject>(setting.rootObjectPath);
+            onComplete?.Invoke(resource);
+        }
 
         protected override void OnAlive()
         {

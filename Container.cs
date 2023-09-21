@@ -26,7 +26,6 @@ namespace Game
             context = new MainContext();
             context.AddContext(context);
             StartStaticSection(data.bootLocationSettings);
-            GEvent.Attach(Events.GlobalEvents.StartStatic, OnStartStatic);
         }
 
         public static void StartStaticSection(LocationSetting[] locationSettings)
@@ -35,7 +34,7 @@ namespace Game
                 return;
 
             StaticSection = new LocationSection(context, locationSettings);
-
+            GEvent.Attach(Events.GlobalEvents.StartStatic, OnStartStatic);
             GEvent.Attach(Events.GlobalEvents.DropStatic, OnDropStatic);
             GEvent.Call(Events.GlobalEvents.StartStatic);
         }

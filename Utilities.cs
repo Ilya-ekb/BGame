@@ -67,12 +67,18 @@ namespace Core
             return path.Split('.')[0];
         }
 #endif
-        public static string TimeFromSeconds(float time)
+        public static string FloatToTimeWithMilliseconds(this float time)
         {
             int minutes = (int) time / 60;
             int seconds = (int) time - 60 * minutes;
             int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
             return string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+        }
+        public static string FloatToTime(this float time)
+        {
+            int minutes = (int) time / 60;
+            int seconds = (int) time - 60 * minutes;
+            return string.Format("{0:00}:{1:00}", minutes, seconds);
         }
 
         public static bool TryParseVector2(string value, out Vector2 vector2)
