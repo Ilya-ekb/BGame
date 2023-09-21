@@ -1,4 +1,3 @@
-using Core;
 using Core.Entities.Loopables;
 using Core.ObjectsSystem;
 using Game.Contexts;
@@ -21,7 +20,7 @@ namespace Game
             if (rootObject)
             {
 #if UNITY_EDITOR
-                rootObjectPath = Utilities.GetValidPathToResource(rootObject);
+                rootObjectPath = Core.Utilities.GetValidPathToResource(rootObject);
                 for (var i = 0; i < childrenSettings.Length; i++)
                 {
                     childrenSettings[i].siblingIndex = i + siblingOffset;

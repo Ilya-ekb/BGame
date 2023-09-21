@@ -1,5 +1,4 @@
-﻿using System;
-using Core;
+﻿using Core;
 using Game.Locations.View;
 using Core.ObjectsSystem;
 using Game.Contexts;
@@ -40,7 +39,7 @@ namespace Game.Locations.Model
 
             if (rootObject)
             {
-                rootObjectPath = Utilities.GetValidPathToResource(rootObject);
+                rootObjectPath = Core.Utilities.GetValidPathToResource(rootObject);
             }
         }
 #endif
