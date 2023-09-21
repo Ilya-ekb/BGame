@@ -25,7 +25,7 @@ namespace Game
             chapters = data.chapters;
             context = new MainContext();
             context.AddContext(context);
-
+            StartStaticSection(data.bootLocationSettings);
             GEvent.Attach(Events.GlobalEvents.StartStatic, OnStartStatic);
         }
 
@@ -59,7 +59,11 @@ namespace Game
 
         public static void Dispose()
         {
+            DynamicSection?.Drop();
             StaticSection?.Drop();
+
+            DynamicSection = null;
+            StaticSection = null;
         }
 
         private static void StartChapter(Chapter chapter)

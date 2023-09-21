@@ -47,7 +47,7 @@ namespace Game.Locations.Model
 
         protected override void OnDrop()
         {
-            Scheduler.InvokeWhen(()=> !IsAlive, () =>
+            Scheduler.InvokeWhen(()=> IsAlive, () =>
             {
                 var chapter = context.GetContext<MainContext>().CurrentChapter;
                 var isNewScene = chapter.locationSettings.All(s => s is SceneLocationSetting sls && sls.SceneName != scene.name);

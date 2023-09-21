@@ -3,6 +3,7 @@ namespace Game
     public class Bootstrap
     {
         public static bool IsInitiated { get; private set; }
+        
         public static void Initiate(ContainerData data)
         {
             IsInitiated = true;
