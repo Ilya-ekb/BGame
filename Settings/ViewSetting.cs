@@ -14,19 +14,24 @@ namespace Game
         public ViewSetting[] childrenSettings;
         
         public abstract BaseDroppable GetViewInstance<TContext>(TContext context, IDroppable parent) where TContext : IContext;
+
+        [ContextMenu("Get Reference")]
+        protected virtual void GetReference()
+        {
+            rootObjectPath = Core.Utilities.GetValidPathToResource(rootObject);
+        }
         
         protected virtual void OnValidate()
         {
-            if (rootObject)
-            {
+            if (!rootObject) return;
 #if UNITY_EDITOR
-                rootObjectPath = Core.Utilities.GetValidPathToResource(rootObject);
-                for (var i = 0; i < childrenSettings.Length; i++)
-                {
-                    childrenSettings[i].siblingIndex = i + siblingOffset;
-                }
-#endif
+            GetReference();
+            for (var i = 0; i < childrenSettings.Length; i++)
+            {
+                childrenSettings[i].siblingIndex = i + siblingOffset;
+                childrenSettings[i].GetReference();
             }
+#endif
         }
     }
 
