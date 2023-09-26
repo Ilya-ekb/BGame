@@ -18,7 +18,9 @@ namespace Game
         [ContextMenu("Get Reference")]
         protected virtual void GetReference()
         {
+#if UNITY_EDITOR
             rootObjectPath = Core.Utilities.GetValidPathToResource(rootObject);
+#endif
         }
         
         protected virtual void OnValidate()
