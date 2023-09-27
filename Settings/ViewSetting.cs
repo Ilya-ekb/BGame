@@ -15,7 +15,6 @@ namespace Game
         
         public abstract BaseDroppable GetViewInstance<TContext>(TContext context, IDroppable parent) where TContext : IContext;
 
-        [ContextMenu("Get Reference")]
         protected virtual void GetReference()
         {
 #if UNITY_EDITOR
