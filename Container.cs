@@ -57,6 +57,11 @@ namespace Game
                 default;
         }
 
+        public static TContext GetContext<TContext>(Func<TContext, bool> predicate = null) where TContext : class, IContext
+        {
+            return context.GetContext(predicate);
+        }
+
         public static void Dispose()
         {
             DynamicSection?.Drop();
