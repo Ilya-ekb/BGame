@@ -17,11 +17,13 @@ namespace Game.LocationObjects
         protected readonly TView view;
         protected readonly List<IDroppable> children;
         protected readonly IContext context;
+        protected readonly TSetting setting;
 
         protected BaseLocationObject(TSetting setting, IContext context, IDroppable parent) : base(parent)
         {
             Id = Guid.NewGuid();
             this.context = context.GetContext<MainContext>();
+            this.setting = setting;
             view = (TView) setting.GetViewInstance(context, parent);
             children = new List<IDroppable>();
             foreach (var childSetting in setting.childrenSettings)
