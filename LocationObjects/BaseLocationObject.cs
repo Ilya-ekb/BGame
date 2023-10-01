@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core;
 using Core.ObjectsSystem;
 using Game.Contexts;
@@ -28,6 +29,19 @@ namespace Game.LocationObjects
             children = new List<IDroppable>();
             foreach (var childSetting in setting.childrenSettings)
                 children.Add(childSetting.GetInstance(context, this));
+        }
+
+        public override TDroppable GetObject<TDroppable>()
+        {
+            var result = base.GetObject<TDroppable>();
+            foreach (var child in children)
+            {
+                result = child.GetObject<TDroppable>();
+                if (result is { })
+                    return result;
+            }
+
+            return result;
         }
 
         protected override void OnAlive()

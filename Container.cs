@@ -50,14 +50,15 @@ namespace Game
             StartChapter(chapters[index]);
         }
 
-        public static TDroppable GetObject<TDroppable>(Func<TDroppable, bool> predicate = null) where TDroppable : IDroppable
+        public static TDroppable GetObject<TDroppable>() where TDroppable : IDroppable
         {
-            return StaticSection is { } ? StaticSection.GetObject(predicate) :
-                DynamicSection is { } ? DynamicSection.GetObject(predicate) : 
-                default;
+            var result = (StaticSection is { } ? StaticSection.GetObject<TDroppable>() : default) ??
+                         (DynamicSection is { } ? DynamicSection.GetObject<TDroppable>() : default);
+            return result;
         }
 
-        public static TContext GetContext<TContext>(Func<TContext, bool> predicate = null) where TContext : class, IContext
+        public static TContext GetContext<TContext>(Func<TContext, bool> predicate = null)
+            where TContext : class, IContext
         {
             return context.GetContext(predicate);
         }
@@ -82,7 +83,7 @@ namespace Game
 
             GEvent.Attach(Events.GlobalEvents.StartDynamic, OnStartDynamic);
             GEvent.Call(Events.GlobalEvents.DropDynamic);
-            
+
             DynamicSection = new LocationSection(context, chapter.locationSettings);
 
             GEvent.Attach(Events.GlobalEvents.DropDynamic, OnDropDynamic);

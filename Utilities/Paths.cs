@@ -7,6 +7,7 @@ namespace Game.Utilities
         public const string PersistentSettingPath = "Game/Settings/";
         public const string PersistentMainMenu = "Game/";
         public const string UI = "UI/";
+        public const string Buttons = "Buttons/";
 
         public static void OpenInMacFileBrowser(string path)
         {

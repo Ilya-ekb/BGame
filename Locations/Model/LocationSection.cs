@@ -31,11 +31,11 @@ namespace Game.Locations.Model
             base.OnDrop();
         }
         
-        public TDroppable GetObject<TDroppable>(Func<TDroppable, bool> predicate = null) where TDroppable : IDroppable
+        public override TDroppable GetObject<TDroppable>()
         {
             foreach (var loc in locations)
             {
-                var result = ((Location)loc).GetFirstOrDefaultObject(predicate);
+                var result = loc.GetObject<TDroppable>();
                 if (result is { })
                     return result;
             }
