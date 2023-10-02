@@ -12,7 +12,7 @@ namespace Game.LocationObjects
         where TView : BaseDroppable, ILocationObject
         where TSetting : ViewSetting
     {
-        public Guid Id { get; }
+        public Guid Id { get; protected set; }
         public Transform Transform => view.Transform;
 
         protected readonly TView view;
