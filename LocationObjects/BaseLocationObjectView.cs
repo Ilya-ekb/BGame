@@ -73,7 +73,6 @@ namespace Game.Views
             var parentTransform = parent switch
             {
                 ILocationObject locationObject => locationObject.Transform,
-                SceneLocation location => location.Root.transform,
                 _ => null
             };
 

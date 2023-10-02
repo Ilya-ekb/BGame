@@ -1,17 +1,20 @@
+using System;
 using System.Linq;
 using Core;
 using Core.ObjectsSystem;
 using Game.Contexts;
+using Game.LocationObjects;
 using Game.Locations.View;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game.Locations.Model
 {
-    public class SceneLocation : Location
+    public class SceneLocation : Location, ILocationObject
     {
-        public GameObject Root => view.Root;
-
+        public Guid Id { get; } = Guid.NewGuid();
+        public Transform Transform => view.Root.transform;
+        
         private Scene scene;
         protected readonly SceneLocationView view;
 
@@ -35,10 +38,10 @@ namespace Game.Locations.Model
             {
                 view.SetAlive();
 
-                if (Root)
-                    SceneManager.MoveGameObjectToScene(Root, scene);
+                if (Transform)
+                    SceneManager.MoveGameObjectToScene(Transform.gameObject, scene);
                 SetAliveChildren();
-                IsAlive = true;
+                base.OnAlive();
             });
         }
 
