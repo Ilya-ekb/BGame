@@ -1,5 +1,4 @@
-﻿using Core;
-using Game.Locations.View;
+﻿using Game.Locations.View;
 using Core.ObjectsSystem;
 using Game.Contexts;
 using UnityEngine;

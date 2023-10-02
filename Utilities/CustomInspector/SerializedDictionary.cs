@@ -10,7 +10,7 @@ namespace Plugins.BGame.Utilities.CustomInspector
         [SerializeField, HideInInspector] private List<TKey> keys = new List<TKey>();
         [SerializeField, HideInInspector] private List<TValue> values = new List<TValue>();
 
-        public void OnBeforeSerialize()
+        public virtual void OnBeforeSerialize()
         {
             keys.Clear();
             values.Clear();
@@ -21,7 +21,7 @@ namespace Plugins.BGame.Utilities.CustomInspector
             } 
         }
 
-        public void OnAfterDeserialize()
+        public virtual void OnAfterDeserialize()
         {
             Clear();
             for (var i = 0; i < this.keys.Count && i < this.values.Count; i++)
