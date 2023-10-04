@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Locations.View;
 using Core.ObjectsSystem;
 using Game.Contexts;
 
