@@ -8,6 +8,7 @@ namespace Game.Utilities
         public const string PersistentMainMenu = "Game/";
         public const string Services = "Services/";
         public const string Generators = "Generators/";
+        public const string DataContainers = "DataContainers/";
         public const string UI = "UI/";
         public const string Buttons = "Buttons/";
 
