@@ -52,4 +52,29 @@ public static class RectTransformExtension
     public static void SetHeight(this RectTransform trans, float newSize) {
         SetSize(trans, new Vector2(trans.rect.size.x, newSize));
     }
+    
+    public static void FitHorizontalByTexture(this RectTransform parent, RectTransform childRectTransform, Texture texture)
+    {
+        var ratio = (float) texture.width / texture.height;
+        var previewHeight = childRectTransform.GetHeight();
+        childRectTransform.SetWidth(ratio * previewHeight);
+        var parentWidth = parent.GetWidth();
+        if (childRectTransform.GetWidth() >= parentWidth)
+        {
+            childRectTransform.SetWidth(parentWidth);
+            childRectTransform.SetHeight(childRectTransform.GetWidth() / ratio);
+        }
+    }
+    public static void FitVerticalByTexture(this RectTransform parent, RectTransform childRectTransform, Texture texture)
+    {
+        var ratio = (float) texture.width / texture.height;
+        var childWidth = childRectTransform.GetWidth();
+        childRectTransform.SetHeight(childWidth/ratio);
+        var parentHeight = parent.GetHeight();
+        if (childRectTransform.GetHeight() >= parentHeight)
+        {
+            childRectTransform.SetHeight(parentHeight);
+            childRectTransform.SetWidth(childRectTransform.GetHeight() * ratio);
+        }
+    }
 }}
