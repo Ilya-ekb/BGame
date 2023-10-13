@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using Core;
 using Core.ObjectsSystem;
 using Game.Chapters;
@@ -42,9 +43,10 @@ namespace Game
 
         public static void StartDynamicSection(int index)
         {
-            if (chapters is null || index >= chapters.Length)
+            if (chapters is null || index >= chapters.Length || index < 0)
             {
-                throw new Exception($"Chapter with {index} index is not existed");
+                Console.WriteLine($"Chapter with {index} index is not existed");
+                return;
             }
 
             StartChapter(chapters[index]);
