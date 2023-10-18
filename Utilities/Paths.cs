@@ -12,6 +12,8 @@ namespace Game.Utilities
         public const string ECS = "ECS/";
         public const string UI = "UI/";
         public const string Buttons = "Buttons/";
+        public const string Systems = "Systems/";
+        public const string Components = "Components/";
 
         public static void OpenInMacFileBrowser(string path)
         {
