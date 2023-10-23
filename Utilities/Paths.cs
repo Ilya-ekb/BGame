@@ -4,8 +4,8 @@ namespace Game.Utilities
 {
     public static class Paths
     {
-        public const string PersistentSettingPath = "Game/Settings/";
-        public const string PersistentMainMenu = "Game/";
+        public const string Settings = "Game/Settings/";
+        public const string Game = "Game/";
         public const string Services = "Services/";
         public const string Generators = "Generators/";
         public const string DataContainers = "DataContainers/";
@@ -14,6 +14,7 @@ namespace Game.Utilities
         public const string Buttons = "Buttons/";
         public const string Systems = "Systems/";
         public const string Components = "Components/";
+        public const string Inventory = "Inventory/";
 
         public static void OpenInMacFileBrowser(string path)
         {
