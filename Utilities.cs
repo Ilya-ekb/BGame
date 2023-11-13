@@ -74,6 +74,7 @@ namespace Core
             int milliseconds = (int) (1000 * (time - minutes * 60 - seconds));
             return string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
         }
+
         public static string FloatToTime(this float time)
         {
             int minutes = (int) time / 60;
@@ -83,8 +84,8 @@ namespace Core
 
         public static bool TryParseVector2(string value, out Vector2 vector2)
         {
-            var temp=value.Split(',');
-            
+            var temp = value.Split(',');
+
             vector2 = default;
             if (!float.TryParse(temp[0], out var x) || !float.TryParse(temp[1], out var y))
                 return false;
@@ -92,7 +93,7 @@ namespace Core
             vector2 = new Vector2(x, y);
             return true;
         }
-        
+
         public static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -103,9 +104,10 @@ namespace Core
                     return ip.ToString();
                 }
             }
+
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
-        
+
         public static void Log(string msg, Color color)
         {
             Debug.Log($"<color=#{ColorUtility.ToHtmlStringRGBA(color)}>- {msg} </color>");

@@ -27,7 +27,7 @@ namespace Game
             context = new MainContext();
             context.AddContext(context);
             StartStaticSection(data.bootLocationSettings);
-            StartDynamicSection(0);
+            StartDynamicSection(data.startChapter);
         }
 
         public static void StartStaticSection(LocationSetting[] locationSettings)
