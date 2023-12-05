@@ -4,7 +4,7 @@ namespace Game.Utilities
 {
     public static class Paths
     {
-        public const string Settings = "Game/Settings/";
+        public const string Settings = "Settings/";
         public const string Game = "Game/";
         public const string Services = "Services/";
         public const string Generators = "Generators/";
