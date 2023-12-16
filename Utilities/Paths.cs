@@ -15,6 +15,7 @@ namespace Game.Utilities
         public const string Systems = "Systems/";
         public const string Components = "Components/";
         public const string Inventory = "Inventory/";
+        public const string Events = "Events/";
 
         public static void OpenInMacFileBrowser(string path)
         {
