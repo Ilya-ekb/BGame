@@ -17,6 +17,8 @@ namespace Game.Utilities
         public const string Inventory = "Inventory/";
         public const string Events = "Events/";
         public const string Weapons = "Weapons/";
+        public const string UIStyles = "UI/Styles";
+        public const string UXML = "UI/UXML";
 
         public static void OpenInMacFileBrowser(string path)
         {
